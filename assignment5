@@ -5,3 +5,61 @@ Michael phone: 7735730957 email: michael.rodgers312@gmail.com
 Ben phone: 2067477439 email: b_elia@outlook.com
 
 500names.text
+
+import java.util.*;
+public class WeddingTables {
+
+	public static void main(String[] args) {
+		//declarations
+		Scanner s = new Scanner(System.in);
+		int totalGuests, m, n, tablesAtOptimal, tablesShortOne, leftover;
+		//gets user input for table size and number of guests
+		System.out.print("How many guests will each table hold? ");
+		m = s.nextInt();
+		n = m-1;
+		System.out.print("How many guests will be attending the wedding? ");
+	    totalGuests = s.nextInt();
+	    //assigns and remaining people as leftover guests
+	    leftover = totalGuests%m;
+	    //sets initial values of tablesAtOptimal and tablesShortOne
+	    tablesAtOptimal = 0;
+	    tablesShortOne = 0;
+	    if (n>totalGuests) {
+	    	System.out.print("There is no optimal solution.");  
+	    } else {
+	    //if m is a factor of total guests, divides total guests by m 
+	    	} if (leftover == 0) {
+	    		tablesAtOptimal = totalGuests/m;
+	    		n=0;
+	    //check if leftover is evenly divisible by tablesShortOne 
+	    	} else if (leftover%n == 0) {
+	    		tablesShortOne = leftover/n;
+	    		tablesAtOptimal = (totalGuests-leftover)/m;
+	  
+	    	} else {
+	    		tablesAtOptimal = (totalGuests-leftover)/m;
+	    		if (leftover%n >= n) {
+	    			while (leftover%n >= n) {
+	    				tablesShortOne++;
+	    				leftover = leftover - 9;
+	    			}
+	    		
+	    		} else {
+	    			tablesShortOne = 1;
+	    			while (leftover%n != 0){
+	    			leftover++;
+	    			tablesAtOptimal--;
+	    			tablesShortOne++; 
+	    			}
+	    		}
+	    	}
+	    	if (tablesShortOne < 0 || tablesAtOptimal < 0) {
+	    		System.out.println("There is no optimal solution.");
+	    	} else {
+	    		System.out.println("With "+totalGuests+ " guests and a maximum of "+m+
+				" guests per table, the optimal seating arrangement should have "
+				+tablesAtOptimal+" tables of " +m+ " guests, and "+tablesShortOne + 
+				" tables of "+n+ " guests.");
+	    	}
+	}
+}
